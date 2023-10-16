@@ -6,6 +6,9 @@ const PORT = 5005;
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
+const cohorts = require("../data/cohorts.json"); 
+const students = require("../data/students.json");
+
 
 
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
@@ -28,6 +31,23 @@ app.use(cookieParser());
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
+
+// app.get("/api/cohorts",(request, response) => {
+//   console.log (request);
+//   const data = require ("cohorts.json");
+//   response.json(data)
+// });
+
+
+app.get("/api/cohorts", (request, response) => {
+  response.json(cohorts); // Send the cohorts JSON data
+});
+
+app.get("/api/students",(request, response) => {
+  console.log (request);
+  response.json(students)
+});
+
 
 
 // START SERVER
