@@ -6,8 +6,8 @@ const PORT = 5005;
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
-const cohorts = require("../data/cohorts.json"); 
-const students = require("../data/students.json");
+const cohorts = require("./data/cohorts.json"); 
+const students = require("./data/students.json");
 
 
 
@@ -32,11 +32,6 @@ app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
-// app.get("/api/cohorts",(request, response) => {
-//   console.log (request);
-//   const data = require ("cohorts.json");
-//   response.json(data)
-// });
 
 
 app.get("/api/cohorts", (request, response) => {
