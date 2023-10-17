@@ -8,9 +8,9 @@ mongoose
 .then(x => console.log(`Connected to Database: "${x.connections[0].name}"`))
 .catch(err => console.error("Error connecting to MongoDB", err));
 
-// STATIC DATA
-// Devs Team - Import the provided files with JSON data of students and cohorts here:
-// ...
+const Student = require("./models/Student.model");
+const Cohort = require("./models/Cohort.model");
+
 const cohorts = require("./data/cohorts.json"); 
 const students = require("./data/students.json");
 
@@ -38,8 +38,6 @@ app.use(cors({
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
-
-
 
 app.get("/api/cohorts", (request, response) => {
   response.json(cohorts); // Send the cohorts JSON data
