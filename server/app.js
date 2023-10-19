@@ -31,7 +31,6 @@ app.use(cookieParser());
 app.use(cors({
   origin:['http://localhost:5005']
 }));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -40,21 +39,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Devs Team - Start working on the routes here:
 // ...
 
-
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
-
 // Cohort
-
-
 app.get("/api/cohorts", async(request, response) => {
   try {
     const newCohort= await Cohort.find(request.body)
     response.status(201).json({cohort: newCohort})
-  } catch (error) { response.status(500).json({error})
-    
+  } catch (error) {
+    response.status(500).json({error})
   }
 });
 
@@ -62,7 +57,8 @@ app.post("/api/cohorts", async(request, response) =>{
   try {
     const newCohort = await Cohort.create(request.body)
     response.status(201).json({cohort: newCohort})
-  } catch (error) { response.status (500).json({error})   
+  } catch (error) {
+    response.status (500).json({error})   
   }
 })
 
@@ -76,68 +72,58 @@ app.get('/api/cohorts/:cohortId', async (request, response) => {
       response.status(201).json({cohort: oneCohort})
       } else {
           response.status(404).json({message: 'cohort not found'})
-  } 
-
+      } 
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
   }
-}
-else {
+  } else {
   response.status(500).json({message: 'id seems wrong'})
-}
+  }
 });
 
 
 app.put('/api/cohorts/:cohortId', async (request, response) => {
   const {cohortId} = request.params;
-  
   try {
       const updateCohort = await Cohort.findByIdAndUpdate(cohortId, request.body.cohort,{new:true})
       console.log(request.body)
       response.status(201).json({cohort: updateCohort})
-
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
-  }
+    }
 });
 
 app.delete('/api/cohorts/:cohortId', async (request, response) => {
   const {cohortId} = request.params;
-  
   try {
       await Cohort.findByIdAndDelete(cohortId)
       response.status(204).json({message: "Cohort deleted"})
-
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
-  }
+    }
 });
 
-
-
 // Students
-
 app.get("/api/students", async(request, response) => {
   try {
     const newStudent= await Student.find(request.body)
     response.status(201).json({student: newStudent})
-  } catch (error) { response.status(500).json({error})
-    
-  }
+  } catch (error) {
+    response.status(500).json({error})
+    }
 });
 
-app.post("/api/students", async(request, response) =>{
+app.post("/api/students", async(request, response) => {
   try {
     const newStudent = await Student.create(request.body)
     response.status(201).json({student: newStudent})
-  } catch (error) { response.status (500).json({error})   
+  } catch (error) {
+    response.status (500).json({error})   
   }
-})
-
-
+});
 
 app.get('/api/students/cohort/:cohortId', async (request, response) => {
   const {cohortId} = request.params;
@@ -151,16 +137,14 @@ app.get('/api/students/cohort/:cohortId', async (request, response) => {
       response.status(201).json({cohort: cohortStudents})
       } else {
           response.status(404).json({message: 'cohort not found'})
-  } 
-
+        } 
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
   }
-}
-else {
+  } else {
   response.status(500).json({message: 'id seems wrong'})
-}
+    }
 });
 
 app.get('/api/students/:studentId', async (request, response) => {
@@ -173,18 +157,15 @@ app.get('/api/students/:studentId', async (request, response) => {
       response.status(201).json({student: oneStudent})
       } else {
           response.status(404).json({message: 'student not found'})
-  } 
-
+      } 
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
-  }
-}
-else {
+    }
+  } else {
   response.status(500).json({message: 'id seems wrong'})
-}
+  }
 });
-
 
 app.put('/api/students/:studentId', async (request, response) => {
   const {studentId} = request.params;
@@ -193,7 +174,6 @@ app.put('/api/students/:studentId', async (request, response) => {
       const updateStudent = await Student.findByIdAndUpdate(studentId, request.body.student,{new:true})
       console.log(request.body)
       response.status(201).json({student: updateStudent})
-
   } catch (error) {
       console.log(error)
       response.status(500).json({error})
@@ -213,11 +193,6 @@ app.delete('/api/students/:studentId', async (request, response) => {
       response.status(500).json({error})
   }
 });
-
-
-
-
-
 
 // START SERVER
 app.listen(PORT, () => {
