@@ -133,7 +133,7 @@ app.get("/api/students/cohort/:cohortId", async (request, response) => {
   console.log(cohortId);
   if (mongoose.isValidObjectId(cohortId)) {
     try {
-      const cohortStudents = await Cohort.findById(cohortId);
+      const cohortStudents = await Student.find({ cohort: cohortId });
       console.log(cohortStudents);
       if (cohortStudents) {
         console.log(request.body);
