@@ -199,6 +199,10 @@ app.delete("/api/students/:studentId", async (request, response) => {
   }
 });
 
+const { errorHandler, notFoundHandler } = require("./middleware/error-handling");
+app.use(errorHandler);
+app.use(notFoundHandler);
+
 // START SERVER
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
