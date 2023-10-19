@@ -87,7 +87,7 @@ app.put("/api/cohorts/:cohortId", async (request, response) => {
   try {
     const updateCohort = await Cohort.findByIdAndUpdate(
       cohortId,
-      request.body.cohort,
+      request.body,
       { new: true }
     );
     console.log(request.body);
@@ -176,7 +176,7 @@ app.put("/api/students/:studentId", async (request, response) => {
   try {
     const updateStudent = await Student.findByIdAndUpdate(
       studentId,
-      request.body.student,
+      request.body,
       { new: true }
     );
     console.log(request.body);
