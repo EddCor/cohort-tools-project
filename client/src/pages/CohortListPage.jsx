@@ -23,6 +23,7 @@ function CohortListPage() {
     axios
       .get(`${API_URL}/api/cohorts?${queryString}`)
       .then((response) => {
+        console.log(response.data);
         setCohorts(response.data);
       })
       .catch((error) => console.log(error));
@@ -60,15 +61,13 @@ function CohortListPage() {
       </div>
 
       {cohorts &&
-        cohorts.map(
-          (cohort, index) => (
-              <CohortCard
-                key={cohort._id}
-                {...cohort}
-                className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
-              />
-          )
-        )}
+        cohorts.map((cohort, index) => (
+          <CohortCard
+            key={cohort._id}
+            {...cohort}
+            className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+          />
+        ))}
     </div>
   );
 }
